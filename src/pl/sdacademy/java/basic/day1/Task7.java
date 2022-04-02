@@ -1,36 +1,64 @@
 package pl.sdacademy.java.basic.day1;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Task7 {
     private static final String STOP_DECISION = "Stop";
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
+        Scanner input = new Scanner(System.in);
         String decision;
         do {
-            System.out.print("Please insert firstDigit: ");
-            float firstDigit = scanner.nextFloat();
-            scanner.nextLine();
+            System.out.print("Please insert first digit: ");
+            float firstDigit = input.nextFloat();
+            input.nextLine();
 
-            System.out.print("Please insert operator: ");
-            String operator = scanner.nextLine();
+            System.out.print("Please insert operator (+ - / *): ");
+            String operator = input.nextLine();
 
-            System.out.print("Please insert secondDigit: ");
-            float secondDigit = scanner.nextFloat();
-            scanner.nextLine();
+            System.out.print("Please insert second digit: ");
+            float secondDigit = input.nextFloat();
+            input.nextLine();
 
-            float result = calculate(firstDigit, secondDigit, operator);
-            System.out.println("Result: " + result);
-
+            if(isCorrectOperator(operator)) {
+                float result = calculate(firstDigit, secondDigit, operator);
+                System.out.println("Result: " + firstDigit + operator + secondDigit + " = " + result);
+            } else {
+                System.out.println("Incorrect operator");
+                //System.exit(1); // kwestia ustalenia jak pownien się zachować program w tej sytuacji, np. zakończyć program
+            }
             System.out.print("New calculation or Stop? ");
-            decision = scanner.nextLine();
-        } while (!STOP_DECISION.equals(decision));
+            decision = input.nextLine();
+        } while(!STOP_DECISION.equalsIgnoreCase(decision));
+    }
+
+    private static boolean isCorrectOperator(String action) {
+        Pattern pattern = Pattern.compile("[+-/*]");
+        return pattern.matcher(action).matches();
     }
 
     private static float calculate(float firstDigit, float secondDigit, String operator) {
-
-        return 0;
+        float result = 0;
+        switch (operator) {
+            case "+":
+                result = firstDigit + secondDigit;
+                break;
+            case "-":
+                result = firstDigit - secondDigit;
+                break;
+            case "/":
+                if(secondDigit== 0) {
+                    System.out.println("Wrong operation");
+                    System.exit(1); // kwestia ustalenia jak pownien się zachować program w tej sytuacji, np. zakończyć program
+                } else {
+                    result = firstDigit / secondDigit;
+                }
+                break;
+            case "*":
+                result = firstDigit * secondDigit;
+                break;
+        }
+        return result;
     }
 }
