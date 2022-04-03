@@ -13,6 +13,10 @@ public class Task2 {
 
         result = isWordContainsPrefix("", "");
         System.out.println(result);
+
+        String suffix = "nie";
+        result = ifWordContainsSuffix(input, suffix);
+        System.out.println(result);
     }
 
     private static boolean isWordContainsPrefix(String input, String prefix) {
@@ -20,5 +24,11 @@ public class Task2 {
             return input.startsWith(prefix);
         }
         return false;
+        //można jeszcze krócej
+        //return StringHelper.isValid(input) && input.startsWith(prefix);
+    }
+
+    private static boolean ifWordContainsSuffix(String input, String suffix) {
+        return StringHelper.isValid(input) && input.endsWith(suffix);
     }
 }
