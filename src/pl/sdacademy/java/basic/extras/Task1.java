@@ -1,6 +1,6 @@
 package pl.sdacademy.java.basic.extras;
 
-import pl.sdacademy.java.basic.exercises.day2.StringHelper;
+import pl.sdacademy.java.basic.day2.StringHelper;
 
 public class Task1 {
     public static void main(String[] args) {
